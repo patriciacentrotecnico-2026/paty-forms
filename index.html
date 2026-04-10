@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Consultoria Coletiva — Detox Terapêutico</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+    background: #f5f0eb;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+  }
+  .container {
+    background: white;
+    max-width: 560px;
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    overflow: hidden;
+    margin: auto;
+  }
+  .header {
+    background: linear-gradient(135deg, #2c5f2d, #3a7d44);
+    color: white;
+    padding: 32px 28px;
+    text-align: center;
+  }
+  .header h1 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: -0.3px;
+  }
+  .header p {
+    font-size: 14px;
+    opacity: 0.9;
+    line-height: 1.5;
+  }
+  .paty-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.15);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    margin-bottom: 16px;
+  }
+  form { padding: 28px; }
+  .field { margin-bottom: 22px; }
+  label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 6px;
+  }
+  label .req { color: #dc3545; margin-left: 2px; }
+  .hint { font-size: 12px; color: #888; margin-bottom: 6px; }
+  input[type="text"], input[type="email"], textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid #ddd;
+    border-radius: 8px;
+    font-size: 15px;
+    font-family: inherit;
+    transition: border-color 0.2s;
+    background: #fafafa;
+  }
+  input:focus, textarea:focus {
+    outline: none;
+    border-color: #2c5f2d;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(44,95,45,0.1);
+  }
+  textarea { min-height: 100px; resize: vertical; }
+  .radio-group { display: flex; flex-direction: column; gap: 8px; }
+  .radio-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border: 1.5px solid #e8e8e8;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 14px;
+    color: #444;
+  }
+  .radio-option:hover { border-color: #2c5f2d; background: #f8fdf8; }
+  .radio-option input[type="radio"] {
+    accent-color: #2c5f2d;
+    width: 18px; height: 18px; cursor: pointer;
+  }
+  .radio-option:has(input:checked) {
+    border-color: #2c5f2d;
+    background: #f0f8f0;
+  }
+  button[type="submit"] {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #2c5f2d, #3a7d44);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.2s;
+  }
+  button[type="submit"]:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(44,95,45,0.3);
+  }
+  .footer-note {
+    text-align: center;
+    font-size: 12px;
+    color: #aaa;
+    padding: 16px 28px 24px;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <div class="paty-badge">Paty Figueiredo</div>
+    <h1>Consultoria Coletiva</h1>
+    <p>Domingo 12/04, 16h — eu vou responder ao vivo as dúvidas mais importantes do grupo. Manda a sua aqui. Quanto mais específica, melhor consigo te ajudar.</p>
+  </div>
+
+  <form action="https://formsubmit.co/institutopatriciafigueiredo@gmail.com" method="POST">
+    <!-- FormSubmit config -->
+    <input type="hidden" name="_subject" value="Nova dúvida — Consultoria Coletiva Detox">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_next" value="https://consultoria-detox.surge.sh/obrigada.html">
+    <input type="text" name="_honey" style="display:none">
+
+    <div class="field">
+      <label>Seu nome <span class="req">*</span></label>
+      <input type="text" name="Nome" placeholder="Como você quer ser chamada" required>
+    </div>
+
+    <div class="field">
+      <label>Qual a sua maior dúvida sobre a Mentoria Detox Terapêutico? <span class="req">*</span></label>
+      <p class="hint">Pode ser sobre como funciona, investimento, acompanhamento, se serve pro seu caso... qualquer coisa.</p>
+      <textarea name="Dúvida" placeholder="Escreva sua dúvida aqui..." required></textarea>
+    </div>
+
+    <div class="field">
+      <label>Qual o seu momento atual? <span class="req">*</span></label>
+      <div class="radio-group">
+        <label class="radio-option">
+          <input type="radio" name="Momento Atual" value="Em tratamento" required>
+          <span>Estou em tratamento atualmente</span>
+        </label>
+        <label class="radio-option">
+          <input type="radio" name="Momento Atual" value="Terminou tratamento">
+          <span>Já terminei o tratamento</span>
+        </label>
+        <label class="radio-option">
+          <input type="radio" name="Momento Atual" value="Acompanhamento/prevenção">
+          <span>Estou em acompanhamento ou prevenção</span>
+        </label>
+        <label class="radio-option">
+          <input type="radio" name="Momento Atual" value="Casos na família">
+          <span>Tenho casos na família</span>
+        </label>
+      </div>
+    </div>
+
+    <button type="submit">Enviar minha dúvida</button>
+  </form>
+
+  <div class="footer-note">Instituto Patrícia Figueiredo</div>
+</div>
+
+</body>
+</html>
