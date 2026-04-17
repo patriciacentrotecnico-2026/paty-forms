@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Raio-X Detox Terapêutico 5D · Instituto Patrícia Figueiredo</title>
+  <meta name="description" content="Descubra em 5 minutos como estão as 5 dimensões do seu corpo: Inflamação, Microbiota, Imunidade, Energia e Emocional.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+
+  <!-- Libs CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div id="app">
+
+    <!-- ========== TELA 1: ABERTURA ========== -->
+    <section id="screen-intro" class="screen active">
+      <div class="intro-container">
+        <div class="intro-badge">Instituto Patrícia Figueiredo</div>
+        <h1 class="intro-title">Raio-X Detox<br><em>Terapêutico 5D</em></h1>
+        <p class="intro-subtitle">Um diagnóstico de 5 minutos pra entender<br>como estão as <strong>5 dimensões</strong> do seu corpo.</p>
+
+        <div class="intro-dims">
+          <div class="intro-dim"><span>01</span><strong>Inflamação</strong></div>
+          <div class="intro-dim"><span>02</span><strong>Microbiota</strong></div>
+          <div class="intro-dim"><span>03</span><strong>Imunidade</strong></div>
+          <div class="intro-dim"><span>04</span><strong>Energia</strong></div>
+          <div class="intro-dim"><span>05</span><strong>Emocional</strong></div>
+        </div>
+
+        <button id="btn-start" class="btn btn-primary btn-large">COMEÇAR DIAGNÓSTICO</button>
+
+        <p class="intro-meta">25 perguntas · ~5 minutos · resultado personalizado em PDF</p>
+      </div>
+    </section>
+
+    <!-- ========== TELA 2: CAPTURA EMAIL ========== -->
+    <section id="screen-capture" class="screen">
+      <div class="capture-container">
+        <div class="step-indicator">Passo 1 de 2</div>
+        <h2 class="capture-title">Antes de começar,<br>me conta quem é você</h2>
+        <p class="capture-subtitle">Pra eu te mandar seu Raio-X personalizado depois.</p>
+
+        <form id="form-capture" class="form">
+          <div class="field">
+            <label for="name">Seu primeiro nome</label>
+            <input type="text" id="name" name="name" required placeholder="Como você quer ser chamada" autocomplete="given-name">
+          </div>
+
+          <div class="field">
+            <label for="email">Seu melhor email</label>
+            <input type="email" id="email" name="email" required placeholder="seu@email.com" autocomplete="email">
+          </div>
+
+          <label class="checkbox">
+            <input type="checkbox" id="consent" required checked>
+            <span>Concordo em receber meu Raio-X e comunicações do Instituto Patrícia Figueiredo.</span>
+          </label>
+
+          <button type="submit" class="btn btn-primary btn-large">IR PRO DIAGNÓSTICO <span class="arrow">&rarr;</span></button>
+        </form>
+      </div>
+    </section>
+
+    <!-- ========== TELA 3: QUIZ ========== -->
+    <section id="screen-quiz" class="screen">
+      <div class="quiz-header">
+        <div class="progress-wrap">
+          <div class="progress-bar"><div id="progress-fill" class="progress-fill"></div></div>
+          <div class="progress-meta">
+            <span id="progress-count">1</span> de 25
+            <span class="divider">·</span>
+            <span id="progress-dim">Inflamação</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="quiz-container">
+        <div class="dim-tag" id="dim-tag">Dimensão 1 · Inflamação</div>
+        <h3 class="question-text" id="question-text">Pergunta aparece aqui</h3>
+        <p class="question-hint">Responda com sinceridade. Pensando nas últimas 4 semanas:</p>
+
+        <div class="answers">
+          <button class="answer" data-value="0">
+            <span class="answer-label">Nunca</span>
+            <span class="answer-desc">Ou muito raramente</span>
+          </button>
+          <button class="answer" data-value="1">
+            <span class="answer-label">Às vezes</span>
+            <span class="answer-desc">Acontece de vez em quando</span>
+          </button>
+          <button class="answer" data-value="2">
+            <span class="answer-label">Frequentemente</span>
+            <span class="answer-desc">Acontece muito ou toda semana</span>
+          </button>
+        </div>
+
+        <div class="quiz-nav">
+          <button id="btn-back" class="btn btn-ghost" disabled>&larr; Voltar</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== TELA 4: LOADING ========== -->
+    <section id="screen-loading" class="screen">
+      <div class="loading-container">
+        <div class="loading-pulse"></div>
+        <h2 class="loading-title" id="loading-title">Analisando seu corpo...</h2>
+        <p class="loading-sub">Cruzando as 5 dimensões</p>
+      </div>
+    </section>
+
+    <!-- ========== TELA 5: RESULTADO ========== -->
+    <section id="screen-result" class="screen">
+
+      <!-- Bloco que vira PDF -->
+      <div id="result-capture" class="result-capture">
+
+        <header class="result-header">
+          <div class="result-brand">Instituto Patrícia Figueiredo</div>
+          <h1 class="result-title">Seu Raio-X Detox <em>Terapêutico 5D</em></h1>
+          <p class="result-greeting">Olá, <strong id="result-name">Paciente</strong>. Aqui está o mapa das 5 dimensões do seu corpo hoje:</p>
+        </header>
+
+        <section class="result-overall">
+          <div class="overall-box">
+            <div class="overall-label">Classificação Geral</div>
+            <div id="overall-class" class="overall-class">Atenção</div>
+            <div class="overall-score"><span id="overall-score">50</span><small>/100</small></div>
+          </div>
+        </section>
+
+        <section class="result-radar">
+          <h2 class="section-heading">Mapa das 5 Dimensões</h2>
+          <div class="radar-wrap">
+            <svg id="radar-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" aria-label="Radar 5 dimensões"></svg>
+          </div>
+        </section>
+
+        <section class="result-bars">
+          <h2 class="section-heading">Detalhamento por Dimensão</h2>
+          <div id="dim-bars" class="dim-bars"></div>
+        </section>
+
+        <section class="result-narratives">
+          <h2 class="section-heading">Sua Leitura Personalizada</h2>
+          <div id="narratives" class="narratives"></div>
+        </section>
+
+        <footer class="result-footer-pdf">
+          <div>Instituto Patrícia Figueiredo</div>
+          <div>institutopatriciafigueiredo@gmail.com · 🦋</div>
+        </footer>
+
+      </div>
+      <!-- /result-capture -->
+
+      <section class="result-close" id="result-close-text">
+        <p><strong>Você acabou de olhar pra dentro.</strong></p>
+        <p>Esse Raio-X não é um veredito — é uma fotografia. Um retrato do seu corpo agora, com o que ele está te dizendo em cinco áreas que conversam entre si: inflamação, microbiota, imunidade, energia e emocional. Nenhuma delas anda sozinha. Quando uma sobe de nível, puxa as outras. Quando uma se cura, as outras respondem.</p>
+        <p>Se você achou seu resultado tranquilo, ótimo — continue cuidando, porque o que te trouxe até aqui foi o cuidado. Se você achou o resultado difícil, respira. Você não é exceção. Boa parte das pacientes que chegam pra mim começam exatamente nesse lugar — com os cinco eixos pedindo atenção ao mesmo tempo. E saem diferentes. Corpo, cabeça e vida saem diferentes.</p>
+        <p>O Detox Terapêutico é a mentoria que eu construí pra essa virada acontecer com método, com acompanhamento e com acolhimento. Três engrenagens do método anticâncer, duas dimensões do Ayurveda, e uma equipe do seu lado.</p>
+        <p class="close-sign">De coração,<br>Paty 🦋</p>
+      </section>
+
+      <div class="result-cta">
+        <button id="btn-pdf" class="btn btn-gold btn-large">Baixar meu Raio-X em PDF</button>
+        <a id="btn-mentoria" class="btn btn-primary btn-large" href="#" target="_blank" rel="noopener">Conhecer a Mentoria Detox</a>
+      </div>
+
+      <div class="result-foot">
+        <button id="btn-restart" class="btn btn-ghost">Refazer diagnóstico</button>
+      </div>
+
+    </section>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
