@@ -164,7 +164,61 @@ function renderRadar(scores) {
   const n = DIMENSOES.length;
   const angleFor = (i) => (-Math.PI / 2) + (i * (2 * Math.PI / n));
 
-  // Grade concêntrica (5 níveis pentagonais)
+  // Fundo externo (limite do radar)
+  const bgPts = [];
+  for (let i = 0; i < n; i++) {
+    const a = angleFor(i);
+    bgPts.push(`${cx + R * Math.cos(a)},${cy + R * Math.sin(a)}`);
+  }
+  const bgPoly = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+  bgPoly.setAttribute('points', bgPts.join(' '));
+  bgPoly.setAttribute('fill', '#f7fbf8');
+  bgPoly.setAttribute('stroke', '#A8D1BA');
+  bgPoly.setAttribute('stroke-width', '1.5');
+  svg.appendChild(bgPoly);
+
+  // ZONA DE EQUILÍBRIO — pentágono central preenchido (cobre faixa saudável 0-3 = até ~33% do raio)
+  const equilibrioR = R * 0.33;
+  const equiPts = [];
+  for (let i = 0; i < n; i++) {
+    const a = angleFor(i);
+    equiPts.push(`${cx + equilibrioR * Math.cos(a)},${cy + equilibrioR * Math.sin(a)}`);
+  }
+  const equiPoly = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+  equiPoly.setAttribute('points', equiPts.join(' '));
+  equiPoly.setAttribute('fill', 'rgba(74, 140, 106, 0.18)');
+  equiPoly.setAttribute('stroke', '#4A8C6A');
+  equiPoly.setAttribute('stroke-width', '1.5');
+  equiPoly.setAttribute('stroke-dasharray', '4 3');
+  svg.appendChild(equiPoly);
+
+  // Label "EQUILÍBRIO" no centro
+  const equiLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  equiLabel.setAttribute('x', cx);
+  equiLabel.setAttribute('y', cy - 2);
+  equiLabel.setAttribute('text-anchor', 'middle');
+  equiLabel.setAttribute('dominant-baseline', 'middle');
+  equiLabel.setAttribute('font-family', "'Lato', sans-serif");
+  equiLabel.setAttribute('font-weight', '900');
+  equiLabel.setAttribute('font-size', '11');
+  equiLabel.setAttribute('letter-spacing', '2');
+  equiLabel.setAttribute('fill', '#2F5D44');
+  equiLabel.textContent = 'EQUILÍBRIO';
+  svg.appendChild(equiLabel);
+
+  const equiSub = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  equiSub.setAttribute('x', cx);
+  equiSub.setAttribute('y', cy + 12);
+  equiSub.setAttribute('text-anchor', 'middle');
+  equiSub.setAttribute('dominant-baseline', 'middle');
+  equiSub.setAttribute('font-family', "'Lato', sans-serif");
+  equiSub.setAttribute('font-weight', '400');
+  equiSub.setAttribute('font-size', '9');
+  equiSub.setAttribute('fill', '#4A8C6A');
+  equiSub.textContent = '(alvo)';
+  svg.appendChild(equiSub);
+
+  // Grade concêntrica (níveis)
   for (let lvl = 1; lvl <= levels; lvl++) {
     const r = (R / levels) * lvl;
     const pts = [];
@@ -174,9 +228,9 @@ function renderRadar(scores) {
     }
     const poly = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
     poly.setAttribute('points', pts.join(' '));
-    poly.setAttribute('fill', lvl === levels ? 'rgba(253, 252, 248, 1)' : 'none');
-    poly.setAttribute('stroke', '#d6d2c8');
-    poly.setAttribute('stroke-width', '1');
+    poly.setAttribute('fill', 'none');
+    poly.setAttribute('stroke', '#d0dfd5');
+    poly.setAttribute('stroke-width', '0.75');
     svg.appendChild(poly);
   }
 
@@ -188,12 +242,12 @@ function renderRadar(scores) {
     line.setAttribute('y1', cy);
     line.setAttribute('x2', cx + R * Math.cos(a));
     line.setAttribute('y2', cy + R * Math.sin(a));
-    line.setAttribute('stroke', '#d6d2c8');
-    line.setAttribute('stroke-width', '1');
+    line.setAttribute('stroke', '#c5d7cc');
+    line.setAttribute('stroke-width', '0.75');
     svg.appendChild(line);
   }
 
-  // Dados — polígono preenchido marsala
+  // Dados do usuário — polígono preenchido em verde escuro (quanto maior, mais afastado = pior)
   const dataPts = [];
   for (let i = 0; i < n; i++) {
     const d = DIMENSOES[i];
@@ -204,8 +258,8 @@ function renderRadar(scores) {
   }
   const dataPoly = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
   dataPoly.setAttribute('points', dataPts.join(' '));
-  dataPoly.setAttribute('fill', 'rgba(140, 58, 74, 0.35)');
-  dataPoly.setAttribute('stroke', '#8C3A4A');
+  dataPoly.setAttribute('fill', 'rgba(31, 61, 43, 0.35)');
+  dataPoly.setAttribute('stroke', '#1F3D2B');
   dataPoly.setAttribute('stroke-width', '2.5');
   dataPoly.setAttribute('stroke-linejoin', 'round');
   svg.appendChild(dataPoly);
@@ -220,7 +274,7 @@ function renderRadar(scores) {
     circle.setAttribute('cx', cx + r * Math.cos(a));
     circle.setAttribute('cy', cy + r * Math.sin(a));
     circle.setAttribute('r', 5);
-    circle.setAttribute('fill', '#C4A240');
+    circle.setAttribute('fill', '#2F5D44');
     circle.setAttribute('stroke', '#fff');
     circle.setAttribute('stroke-width', 2);
     svg.appendChild(circle);
@@ -253,7 +307,7 @@ function renderRadar(scores) {
     scoreTxt.setAttribute('font-family', "'Playfair Display', serif");
     scoreTxt.setAttribute('font-weight', '700');
     scoreTxt.setAttribute('font-size', '14');
-    scoreTxt.setAttribute('fill', '#8C3A4A');
+    scoreTxt.setAttribute('fill', '#2F5D44');
     scoreTxt.textContent = `${scores[d.id].toFixed(1)}/10`;
     svg.appendChild(scoreTxt);
   }

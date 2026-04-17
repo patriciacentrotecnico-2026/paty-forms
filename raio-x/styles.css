@@ -1,25 +1,39 @@
 /* =========================================================
    Raio-X Detox Terapêutico 5D — Instituto Patrícia Figueiredo
-   Paleta: Marsala / Dourado / Verde / Papel off-white
+   Paleta: Mentoria Verde (apenas tons de verde + neutros)
    Mobile-first. Vanilla CSS.
    ========================================================= */
 
 :root {
-  --marsala: #8C3A4A;
-  --marsala-dark: #6E2C3A;
-  --marsala-light: #B15868;
-  --gold: #C4A240;
-  --gold-light: #E0C775;
-  --green: #4A8C6A;
-  --green-light: #6AAF89;
+  /* Paleta oficial — Mentoria Detox (só verdes) */
+  --green-deep: #1F3D2B;     /* verde escuro profundo (substitui marsala-dark) */
+  --green-dark: #2F5D44;     /* verde escuro (principal forte) */
+  --green-main: #4A8C6A;     /* verde principal Instituto */
+  --green-medium: #6BA987;   /* verde médio */
+  --green-soft: #A8D1BA;     /* verde suave/claro */
+  --green-olive: #5A6E2D;    /* verde oliva escuro (atenção, contraste) */
+  --green-sage: #8DA77C;     /* verde sage (accents neutros) */
+  --green-pale: #E8F2EC;     /* verde pálido (fundos) */
+
+  /* Aliases legados — apontam tudo pra verdes */
+  --marsala: var(--green-dark);
+  --marsala-dark: var(--green-deep);
+  --marsala-light: var(--green-medium);
+  --gold: var(--green-olive);
+  --gold-light: var(--green-sage);
+  --green: var(--green-main);
+  --green-light: var(--green-medium);
+
+  /* Neutros */
   --black: #2a2a2a;
   --gray: #6b6b6b;
-  --gray-light: #d6d2c8;
+  --gray-light: #d6d6d0;
   --paper: #fff;
-  --bg: #fdfcf8;
+  --bg: #f7fbf8;
+
   --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
-  --shadow-md: 0 6px 20px rgba(140, 58, 74, 0.08);
-  --shadow-lg: 0 12px 40px rgba(140, 58, 74, 0.14);
+  --shadow-md: 0 6px 20px rgba(47, 93, 68, 0.10);
+  --shadow-lg: 0 12px 40px rgba(47, 93, 68, 0.18);
   --radius: 14px;
   --radius-sm: 8px;
   --font-display: 'Playfair Display', Georgia, serif;
@@ -104,7 +118,7 @@ em { font-style: italic; }
   letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--marsala);
-  background: rgba(140, 58, 74, 0.08);
+  background: rgba(47, 93, 68, 0.08);
   padding: 6px 14px;
   border-radius: 20px;
   margin-bottom: 28px;
@@ -229,7 +243,7 @@ em { font-style: italic; }
   background: var(--bg);
   padding: 20px 4px 10px;
   z-index: 10;
-  border-bottom: 1px solid rgba(140,58,74,0.08);
+  border-bottom: 1px solid rgba(47,93,68,0.08);
   margin: 0 -20px 24px;
   padding-left: 20px;
   padding-right: 20px;
@@ -319,7 +333,7 @@ em { font-style: italic; }
 }
 .answer.selected {
   border-color: var(--marsala);
-  background: rgba(140, 58, 74, 0.04);
+  background: rgba(47, 93, 68, 0.04);
 }
 .answer-label {
   font-size: 17px;
@@ -353,7 +367,7 @@ em { font-style: italic; }
 }
 @keyframes pulse {
   0%, 100% { transform: scale(1); opacity: 0.75; }
-  50% { transform: scale(1.12); opacity: 1; box-shadow: 0 0 40px rgba(196, 162, 64, 0.5); }
+  50% { transform: scale(1.12); opacity: 1; box-shadow: 0 0 40px rgba(90, 110, 45, 0.5); }
 }
 .loading-title {
   font-family: var(--font-display);
@@ -425,6 +439,18 @@ em { font-style: italic; }
 }
 
 .result-radar { margin-bottom: 28px; }
+.radar-hint {
+  background: var(--green-pale);
+  border-left: 3px solid var(--green-main);
+  padding: 14px 18px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--black);
+  margin-bottom: 18px;
+}
+.radar-hint strong { color: var(--green-dark); font-weight: 700; }
+.radar-hint em { color: var(--green-main); font-weight: 700; font-style: normal; }
 .radar-wrap {
   width: 100%;
   max-width: 420px;
@@ -478,8 +504,8 @@ em { font-style: italic; }
   font-weight: 700;
 }
 .dim-bar-label.healthy { background: rgba(74,140,106,0.15); color: var(--green); }
-.dim-bar-label.attention { background: rgba(196,162,64,0.15); color: #8B7320; }
-.dim-bar-label.critical { background: rgba(140,58,74,0.12); color: var(--marsala); }
+.dim-bar-label.attention { background: rgba(90,110,45,0.15); color: #5A6E2D; }
+.dim-bar-label.critical { background: rgba(47,93,68,0.12); color: var(--marsala); }
 
 .result-narratives { margin-bottom: 10px; }
 .narratives { display: flex; flex-direction: column; gap: 18px; }
@@ -503,7 +529,7 @@ em { font-style: italic; }
 .narrative-title { font-family: var(--font-display); font-size: 19px; color: var(--marsala); font-weight: 700; }
 .narrative-class { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
 .narrative-class.healthy { color: var(--green); }
-.narrative-class.attention { color: #8B7320; }
+.narrative-class.attention { color: #5A6E2D; }
 .narrative-class.critical { color: var(--marsala); }
 .narrative-text { font-size: 14.5px; line-height: 1.6; color: var(--black); }
 
